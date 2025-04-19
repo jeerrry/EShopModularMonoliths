@@ -1,13 +1,13 @@
 namespace Catalog.Products.Features.UpdateProduct;
 
-public record UpdateProdcutCommand(ProductDto Product) : ICommand<UpdateProductResult>;
+public record UpdateProductCommand(ProductDto Product) : ICommand<UpdateProductResult>;
 
 public record UpdateProductResult(bool IsSuccess);
 
 public class UpdateProductHandler(CatalogDbContext dbContext)
-    : ICommandHandler<UpdateProdcutCommand, UpdateProductResult>
+    : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
-    public async Task<UpdateProductResult> Handle(UpdateProdcutCommand command, CancellationToken cancellationToken)
+    public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
     {
         var product = await dbContext.Products.FindAsync([command.Product.Id], cancellationToken: cancellationToken);
         if (product is null)
