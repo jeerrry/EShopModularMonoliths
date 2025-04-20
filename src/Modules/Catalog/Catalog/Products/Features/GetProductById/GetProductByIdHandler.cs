@@ -15,7 +15,7 @@ public class GetProductByIdHandler(CatalogDbContext dbContext)
 
         if (product is null)
         {
-            throw new Exception($"Product with id {query.Id} not found.");
+            throw new ProductNotFoundException(query.Id);
         }
 
         // mapping product entity to ProductDto using Mapster
