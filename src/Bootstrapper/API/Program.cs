@@ -10,7 +10,11 @@ var basketAssembly = typeof(BasketModule).Assembly;
 
 builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly);
 builder.Services.AddMediatRWithAssemblies(catalogAssembly, basketAssembly);
-builder.Services.AddValidatorsFromAssemblies([catalogAssembly, basketAssembly]);
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
 
 //module services: catalog, basket, ordering
 builder.Services

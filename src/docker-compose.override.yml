@@ -1,3 +1,5 @@
+version: '3.4'
+
 services:
   eshopdb:
     container_name: eshopdb
@@ -7,9 +9,15 @@ services:
       - POSTGRES_DB=EShopDb
     restart: always
     ports:
-     - "5432:5432"
+      - "5432:5432"
     volumes:
-     - postgres_eshopdb:/var/lib/postgresql/data/
+      - postgres_eshopdb:/var/lib/postgresql/data/
+
+  distributedcache:
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
 
   seq:
     container_name: seq
