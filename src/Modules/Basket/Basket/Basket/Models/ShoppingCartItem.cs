@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace Basket.Basket.Models;
+
 public class ShoppingCartItem : Entity<Guid>
 {
     public Guid ShoppingCartId { get; private set; } = default!;
@@ -12,7 +13,8 @@ public class ShoppingCartItem : Entity<Guid>
     public decimal Price { get; private set; } = default!;
     public string ProductName { get; private set; } = default!;
 
-    internal ShoppingCartItem(Guid shoppingCartId, Guid productId, int quantity, string color, decimal price, string productName)
+    internal ShoppingCartItem(Guid shoppingCartId, Guid productId, int quantity, string color, decimal price,
+        string productName)
     {
         ShoppingCartId = shoppingCartId;
         ProductId = productId;
@@ -23,7 +25,8 @@ public class ShoppingCartItem : Entity<Guid>
     }
 
     [JsonConstructor]
-    public ShoppingCartItem(Guid id, Guid shoppingCartId, Guid productId, int quantity, string color, decimal price, string productName)
+    public ShoppingCartItem(Guid id, Guid shoppingCartId, Guid productId, int quantity, string color, decimal price,
+        string productName)
     {
         Id = id;
         ShoppingCartId = shoppingCartId;
@@ -32,5 +35,11 @@ public class ShoppingCartItem : Entity<Guid>
         Color = color;
         Price = price;
         ProductName = productName;
+    }
+
+    public void UpdatePrice(decimal newPrice)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(newPrice);
+        Price = newPrice;
     }
 }
